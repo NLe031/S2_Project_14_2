@@ -21,3 +21,14 @@
       the customer.
 
 */
+
+window.addEventListener("load", setupCart);
+
+// this function is to define the event handlers for the Add to Order buttons on the page.
+function setupCart() {
+      var addButtons = document.querySelectorAll("input.addButton");
+}
+
+function addItem(e) {
+
+}

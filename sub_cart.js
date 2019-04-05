@@ -26,10 +26,10 @@ window.addEventListener("load", setupCart);
 
 // this function is to define the event handlers for the Add to Order buttons on the page.
 function setupCart() {
-      var addButtons = document.getElementsByClassName("input.addButton");
+      var addButtons = document.getElementsByClassName("addButton");
 
       for (var i = 0; i < addButtons.length; i++) {
-            addEventListener("click", addItem);
+            addButtons[i].onclick = addItem;
       }
 }
 
@@ -37,15 +37,26 @@ function setupCart() {
 function addItem(e) {
       var foodItem = e.target.nextElementSibling;
 
-      var foodID = foodItem.id;
+      var foodID = foodItem.getAttribute("id");
 
-      var foodDescription = foodID.cloneNode(true);
+      var foodDescription = foodItem.cloneNode(true);
 
       var cartBox = document.getElementById("cart");
 
       var duplicateOrder = false;
+      //loops to see if the customer has placed the same menu item before and if so add it on the same item
+      for (var n = cartBox.firstChild; n = n.nextElementSibling; n !== null) {
+            if (n.id === foodID) {
+                  duplicateOrder = true;
+                  n.firstElementChild.textContent++;
+                  break;
+            }
+      }
 
-      for (var i = 0; i < cartBox.length; i++) {
-
+      if (duplicateOrder === false) {
+            var orderCount = document.createElement("span");
+            orderCount.textContent = "1";
+            foodDescription.insertBefore(orderCount, foodDescription.firstChild);
+            cartBox.appendChild(foodDescription);
       }
 }

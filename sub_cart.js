@@ -26,9 +26,26 @@ window.addEventListener("load", setupCart);
 
 // this function is to define the event handlers for the Add to Order buttons on the page.
 function setupCart() {
-      var addButtons = document.querySelectorAll("input.addButton");
+      var addButtons = document.getElementsByClassName("input.addButton");
+
+      for (var i = 0; i < addButtons.length; i++) {
+            addEventListener("click", addItem);
+      }
 }
 
+//Function that adds the food items when the button is clicked
 function addItem(e) {
+      var foodItem = e.target.nextElementSibling;
 
+      var foodID = foodItem.id;
+
+      var foodDescription = foodID.cloneNode(true);
+
+      var cartBox = document.getElementById("cart");
+
+      var duplicateOrder = false;
+
+      for (var i = 0; i < cartBox.length; i++) {
+
+      }
 }
